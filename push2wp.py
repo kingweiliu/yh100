@@ -38,11 +38,14 @@ def load_csv(filename):
             tbkitem = {}
             tbkitem["goods_id"] = x[0]
 
-            qtk_info = get_qtk_info(x[0])
-            if not qtk_info:
-                continue
-            tbkitem["goods_introduce"] = qtk_info["goods_introduce"]
-            tbkitem["goods_short_title"] = qtk_info["goods_short_title"]
+            # qtk_info = get_qtk_info(x[0])
+            # if not qtk_info:
+            #     continue
+            # tbkitem["goods_introduce"] = qtk_info["goods_introduce"]
+            # tbkitem["goods_short_title"] = qtk_info["goods_short_title"]
+
+            tbkitem["goods_introduce"] = ""
+            tbkitem["goods_short_title"] = ""
 
             tbkitem["goods_title"] = x[1]
             tbkitem["goods_pic"] = x[2]
@@ -55,14 +58,15 @@ def load_csv(filename):
             tbkitem["platform"] = x[13]
             tbkitem["start_time"] = x[18]
             tbkitem["end_time"] = x[19]
-            tbkitem["tbk_link_quan"] = x[21][:30]
+            tbkitem["tbk_link_quan"] = x[21]
 
 
-            wpop.push2wp(tbkitem)
+            print wpop.push2wp(tbkitem)
            #  print tbkitem["goods_title"]
-            for y in tbkitem:
-                print y, tbkitem[y]
+            # for y in tbkitem:
+            #    print y, tbkitem[y]
 
+            break
     pass
 
 
