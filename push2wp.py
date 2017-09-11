@@ -30,7 +30,18 @@ def get_qtk_info(gid):
         return jshot["data"]["list"][0]
     return None
 
+def cate_dict():
+    dict_cate = {}
+    with open("cate_dict.txt") as file:
+        for line in file:
+            parts = line.strip().split()
+            dict_cate[parts[0]] = parts[1]
+    return dict_cate
+
+
+
 def load_csv(filename):
+    dict_cate = cate_dict()
     with open(filename, "rb") as csvfile:
         csvreader = csv.reader(csvfile)
         csvreader.next()
@@ -59,14 +70,21 @@ def load_csv(filename):
             tbkitem["start_time"] = x[18]
             tbkitem["end_time"] = x[19]
             tbkitem["tbk_link_quan"] = x[21]
+            # 分类
+            cate_part = x[4].split("/")
+            if cate_part[0] in dict_cate:
+                tbkitem["category"] = [dict_cate[cate_part[0]], ]
+
+            #tag
+            tbkitem["tag"] = cate_part
 
 
             print wpop.push2wp(tbkitem)
            #  print tbkitem["goods_title"]
             # for y in tbkitem:
             #    print y, tbkitem[y]
-
             break
+
     pass
 
 

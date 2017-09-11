@@ -12,7 +12,7 @@ from wordpress_xmlrpc.methods.users import GetUserInfo
 from string import Template
 
 # wp = Client('http://cy.syly8.com/xmlrpc.php', 'liujingwei', 'ljwisno1')
-wp = Client('http://127.0.0.1/wordpress/xmlrpc.php', 'liujingwei', 'ljwisno1')
+wp = Client('http://127.0.0.1/yh100/xmlrpc.php', 'liujingwei', 'ljwisno1')
 
 
 post_template = u"""
@@ -64,6 +64,7 @@ def make_wp_content(hotitem):
     post = WordPressPost()
     post.title = hotitem["goods_title"]
     post.content = hotitem["goods_introduce"]
+    post.post_type = "tbkitem"
     iteminfo = json.dumps(hotitem)
     post.custom_fields = [
                           {"key": "iteminfo", "value": iteminfo}]
@@ -77,8 +78,8 @@ def make_wp_content(hotitem):
                                           tbk_link_quan=hotitem["tbk_link_quan"],
                                           img=hotitem["goods_pic"])
     post.terms_names = {
-        'post_tag': ['tagA', 'another tag'],
-        'category': ['My Child Category'],
+        'post_tag': hotitem["tag"],
+        'category': hotitem["category"],
     }
     post.post_status = "publish"
     return post
