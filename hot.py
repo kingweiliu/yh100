@@ -53,8 +53,8 @@ def push2wp(hotitem):
 
                                           img=hotitem["goods_pic"])
     post.terms_names = {
-        'post_tag': ['tagA', 'another tag'],
-        'category': ['My Child Category'],
+        'post_tag': hotitem["tag"],
+        'category': hotitem["category"],
     }
     post.post_status = "publish"
     post.id = wp.call(wordpress_xmlrpc.methods.posts.NewPost(post))
